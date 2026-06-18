@@ -58,6 +58,9 @@ cp -r dside ~/.claude/skills/dside
 
 # Project-scoped (one repo only):
 cp -r dside .claude/skills/dside
+
+# Via npx
+npx skills add henriquesss/dside
 ```
 
 Claude discovers the skill automatically by reading `SKILL.md`. Start a new
