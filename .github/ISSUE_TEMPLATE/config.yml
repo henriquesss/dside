@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 8020.app library
+    url: https://8020.app/library
+    about: The original mental models library this project is built on.

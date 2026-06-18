@@ -1,56 +1,103 @@
-# dside
+# dside 🧠
 
-> A Claude Agent Skill. _Replace this line with a one-sentence pitch._
+> Decide better. A [Claude Skill](https://docs.claude.com/en/docs/claude-code/skills)
+> that helps you reason through real decisions using **118 proven mental models**.
 
-A [Claude Skill](https://docs.claude.com/en/docs/claude-code/skills) that
-<does the thing>. Skills extend Claude with custom instructions, scripts, and
-resources that load automatically when relevant.
+You describe a dilemma — _"can I go to another job or find a bonus in the current
+one?"_ — and `dside` finds the mental models that best fit your situation, lets
+you pick one, and applies it to **your specific circumstances**. No generic
+textbook definitions: an actual lens on your actual decision.
 
-## What it does
+## How it works
 
-- <Capability one>
-- <Capability two>
+```
+You:    /dside should I take the startup offer or stay at my stable job?
+
+dside:  Here are 3 mental models that fit your situation:
+        1. Opportunity Cost (Finance) — what you give up by staying is the real price.
+        2. Regret Minimization (Decision) — which choice will 80-year-old you regret less?
+        3. Asymmetry of Risk (Strategy) — compare the downside vs the upside of each path.
+
+        Which one do you want to apply? (1–3, or ask for other options.)
+
+You:    2
+
+dside:  [applies Regret Minimization to your specific job decision...]
+```
+
+1. **Describe your situation** with `/dside <your decision>`.
+2. **dside recommends up to 3 mental models** with a one-line reason each.
+3. **You pick one** — dside fills a template applied to *your* situation.
+4. **Keep going** — refine, apply another model, or commit to the decision.
+
+## The library
+
+All **118 mental models** live in
+[`references/mental-models.json`](./references/mental-models.json), sourced from
+the excellent [8020.app library](https://8020.app/library). Each model includes:
+
+| Field | Meaning |
+|-------|---------|
+| `name` | The mental model's name |
+| `category` | One of: Productivity, Strategy, Decision, Finance, Business, Personal, Psychology |
+| `description` | One-line summary |
+| `explanation` | What the model means |
+| `example` | A concrete real-world example |
+| `application` | How to actually use it |
+
+Category breakdown: Psychology (29), Strategy (21), Productivity (18),
+Decision (17), Business (15), Personal (10), Finance (8).
 
 ## Install
 
 Copy this folder into a Claude skills directory:
 
 ```bash
-# Personal (all projects):
+# Personal (all your projects):
 cp -r dside ~/.claude/skills/dside
 
-# Project-scoped (this repo only):
+# Project-scoped (one repo only):
 cp -r dside .claude/skills/dside
 ```
 
 Claude discovers the skill automatically by reading `SKILL.md`. Start a new
-session and ask for something that matches the skill's description.
+session and either invoke `/dside <situation>` or just describe a decision.
 
 ## Structure
 
 ```
 dside/
-├── SKILL.md            # Entry point: frontmatter + instructions (required)
-├── scripts/            # Executable helpers Claude can run
-│   └── example.sh
-├── references/         # Detailed docs loaded on demand
-│   └── guidelines.md
-├── assets/             # Templates / fixtures used to produce output
-├── README.md           # This file (for humans, not loaded by Claude)
-└── LICENSE
+├── SKILL.md                       # Entry point: the decision flow (required)
+├── references/
+│   └── mental-models.json         # All 118 mental models
+├── assets/
+│   └── model-template.md          # Template filled in when applying a model
+├── README.md                      # This file (for humans)
+├── LICENSE
+└── .github/
+    └── ISSUE_TEMPLATE/            # Templates for contributors
 ```
 
-## Usage
+## Contributing
 
-Once installed, just describe your task in natural language — for example:
+This is for the community — contributions welcome! 🙌
 
-> "<an example prompt that triggers the skill>"
+- **Add or correct a mental model?** Edit `references/mental-models.json` (keep
+  the field shape consistent) and open a PR.
+- **Improve the matching logic or template?** Edit `SKILL.md` /
+  `assets/model-template.md`.
+- **Found a bug or have an idea?** Open an issue — we have
+  [templates](./.github/ISSUE_TEMPLATE) for bugs, new models, and feature
+  requests.
 
-## Development
+Please keep model data faithful to its source and avoid duplicates (check the
+`slug` field).
 
-- Keep `SKILL.md` concise; move depth into `references/`.
-- The `name` field must be lowercase, hyphenated, and match the folder name.
-- The `description` drives discovery — be specific and include real trigger words.
+## Credits
+
+Mental models data from [8020.app](https://8020.app/library) — a wonderful tool
+for idea evaluation and task prioritization. This project simply makes that
+library usable as a Claude Skill.
 
 ## License
 

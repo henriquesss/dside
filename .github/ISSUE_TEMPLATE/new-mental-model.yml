@@ -1,0 +1,71 @@
+name: "🧠 New mental model"
+description: Propose a mental model to add to the library.
+title: "[Model] <mental model name>"
+labels: ["new-model"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for expanding the library! Please fill the fields below the same
+        way they appear in `references/mental-models.json`. One model per issue.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: e.g. Hanlon's Razor
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Productivity
+        - Strategy
+        - Decision
+        - Finance
+        - Business
+        - Personal
+        - Psychology
+    validations:
+      required: true
+  - type: input
+    id: description
+    attributes:
+      label: Description (one line)
+      placeholder: A short, plain-language summary.
+    validations:
+      required: true
+  - type: textarea
+    id: explanation
+    attributes:
+      label: Explanation
+      description: What does this model mean?
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example
+      description: A concrete, real-world example.
+    validations:
+      required: true
+  - type: textarea
+    id: application
+    attributes:
+      label: Application
+      description: How does someone actually use this in a decision?
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source (optional)
+      placeholder: Link to where this model is described.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I checked this model (and its `slug`) is not already in the library.
+          required: true
